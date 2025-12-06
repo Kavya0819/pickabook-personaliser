@@ -29,7 +29,7 @@ function App() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("http://localhost:8000/personalize", {
+      const res = await fetch("https://pickabook-backend.onrender.com/personalize", {
         method: "POST",
         body: formData,
       });
