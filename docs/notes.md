@@ -18,3 +18,7 @@
 - Better face crop
 - Style selection
 - Save history
+
+## Replicate Billing
+Instant-ID runs on Replicate’s GPU infrastructure and requires paid billing for API calls. 
+For this assignment, the deployed version returns a fallback image instead of a live generation.
