@@ -52,3 +52,7 @@ pickabook-personaliser/
     src/
       App.jsx
       main.jsx
+
+##Limitations
+   - Instant-ID requires a billing account on Replicate, so the production demo uses a fallback image instead of a live generation.
+
