@@ -37,7 +37,7 @@ The generated image (or a fallback image) is then returned to the frontend and d
 
 ---
 
-## 3. Project Structure
+## 3. Project Structure 
 
 ```text
 pickabook-personaliser/
@@ -52,7 +52,8 @@ pickabook-personaliser/
     src/
       App.jsx
       main.jsx
+```
 
-##Limitations
+## 4. Limitations
    - Instant-ID requires a billing account on Replicate, so the production demo uses a fallback image instead of a live generation.
 
