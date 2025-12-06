@@ -19,6 +19,7 @@ client = replicate.Client(api_token=REPLICATE_API_TOKEN)
 # allow React app
 origins = [
     "http://localhost:5173",
+    "https://pickabook-personaliser.vercel.app",
 ]
 
 app.add_middleware(
