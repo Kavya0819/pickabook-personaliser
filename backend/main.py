@@ -48,33 +48,32 @@ async def personalize(file: UploadFile = File(...)):
         image.save(buf, format="PNG")
         png_bytes = buf.getvalue()
 
-        # 2. template illustration
+        # ---------- Always return original image (fallback) ----------
+        encoded = base64.b64encode(png_bytes).decode("utf-8")
+        data_url = f"data:image/png;base64,{encoded}"
+        return JSONResponse({"image_base64": data_url})
+
+        # ---------- (Optional) Real Replicate call, kept as comment ----------
+        """
         template_path = os.path.join("templates", "template1.png")
-        with open(template_path, "rb") as template_file:
-            try:
-                # 3. call Replicate
-                output = client.run(
-                    "grandlineai/instant-id-artistic:9cad10c7870bac9d6b587f406aef28208f964454abff5c4152f7dec9b0212a9a",
-                    input={
-                        "image": template_file,
-                        "face_image": BytesIO(png_bytes),
-                        "prompt": "cute storybook style illustration of the child",
-                    },
-                )
+        template_file = open(template_path, "rb")
 
-                if isinstance(output, list):
-                    image_url = output[0]
-                else:
-                    image_url = output
+        output = client.run(
+            "grandlineai/instant-id-artistic:9cad10c7870bac9d6b587f406aef28208f964454abff5c4152f7dec9b0212a9a",
+            input={
+                "image": template_file,
+                "face_image": BytesIO(png_bytes),
+                "prompt": "cute storybook style illustration of the child",
+            },
+        )
 
-                return JSONResponse({"image_url": image_url})
+        if isinstance(output, list):
+            image_url = output[0]
+        else:
+            image_url = output
 
-            except Exception as rep_err:
-                # If Replicate fails (no credit, etc.), fall back to original image
-                print("Replicate error:", rep_err)
-                encoded = base64.b64encode(png_bytes).decode("utf-8")
-                data_url = f"data:image/png;base64,{encoded}"
-                return JSONResponse({"image_base64": data_url})
+        return JSONResponse({"image_url": image_url})
+        """
 
     except Exception as e:
         print("Error in /personalize:", e)
